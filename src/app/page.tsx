@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, MessageCircle, Receipt, BarChart, Calendar, Users, FileText, Settings, Smartphone, Bell, IndianRupee, ShieldCheck } from "lucide-react";
 import Image from "next/image";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
