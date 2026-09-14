@@ -24,9 +24,11 @@ export default function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
-                <Button size="lg" className="w-full sm:w-auto rounded-full text-base h-12 px-8">
-                  Start Free <span className="ml-2">→</span>
-                </Button>
+                <Link href="https://app.blogcube.site/register">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full text-base h-12 px-8">
+                    Start Free <span className="ml-2">→</span>
+                  </Button>
+                </Link>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full text-base h-12 px-8">
                   Book a Demo
                 </Button>
@@ -464,7 +466,9 @@ export default function Home() {
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-green-500" /> Billing & Payments</li>
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-green-500" /> 3 Staff Members</li>
                </ul>
-               <Button variant="outline" className="w-full">Get Started</Button>
+               <Link href="https://app.blogcube.site/register" className="w-full">
+                 <Button variant="outline" className="w-full">Get Started</Button>
+               </Link>
              </div>
 
              {/* Growth */}
@@ -485,7 +489,9 @@ export default function Home() {
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-primary" /> 10 Staff Members</li>
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-primary" /> Inventory Management</li>
                </ul>
-               <Button className="w-full">Get Started</Button>
+               <Link href="https://app.blogcube.site/register" className="w-full">
+                 <Button className="w-full">Get Started</Button>
+               </Link>
              </div>
 
              {/* Pro */}
@@ -502,7 +508,9 @@ export default function Home() {
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-green-500" /> Dedicated Support</li>
                  <li className="flex items-center gap-2 text-sm"><CheckCircle2 className="w-4 h-4 text-green-500" /> Unlimited Staff Members</li>
                </ul>
-               <Button variant="outline" className="w-full">Get Started</Button>
+               <Link href="https://app.blogcube.site/register" className="w-full">
+                 <Button variant="outline" className="w-full">Get Started</Button>
+               </Link>
              </div>
           </div>
         </div>
@@ -554,7 +562,9 @@ export default function Home() {
                 <p className="text-zinc-400">Start managing your salon smarter today.</p>
               </div>
               <div className="flex gap-4 shrink-0">
-                <Button className="rounded-full bg-primary text-white hover:bg-primary/90">Start Free <span className="ml-2">→</span></Button>
+                <Link href="https://app.blogcube.site/register">
+                  <Button className="rounded-full bg-primary text-white hover:bg-primary/90">Start Free <span className="ml-2">→</span></Button>
+                </Link>
                 <Button variant="outline" className="rounded-full text-zinc-950">Book a Demo</Button>
               </div>
             </div>

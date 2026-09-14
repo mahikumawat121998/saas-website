@@ -44,7 +44,9 @@ export function Navbar() {
           <Link href="https://app.blogcube.site/login" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
             Login
           </Link>
-          <Button className="rounded-full px-6 whitespace-nowrap">Start Free</Button>
+          <Link href="https://app.blogcube.site/register">
+            <Button className="rounded-full px-6 whitespace-nowrap">Start Free</Button>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -71,7 +73,9 @@ export function Navbar() {
           <Link href="https://app.blogcube.site/login" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
             Login
           </Link>
-          <Button className="rounded-full w-full mt-2" size="lg">Start Free</Button>
+          <Link href="https://app.blogcube.site/register" onClick={() => setIsMobileMenuOpen(false)}>
+            <Button className="rounded-full w-full mt-2" size="lg">Start Free</Button>
+          </Link>
         </div>
       )}
     </nav>
