@@ -126,6 +126,6 @@
   }
   html {
     @apply font-sans;
-    font-size: 75%;
+    font-size: 75%; /* Scales entire Tailwind site to 75% */
   }
 }

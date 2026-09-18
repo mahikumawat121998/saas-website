@@ -23,7 +23,7 @@ export default function RootLayout({
       lang="en"
       className={`${font.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
         <Navbar />
         <main className="flex-1 pt-16">
           {children}

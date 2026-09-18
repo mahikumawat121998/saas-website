@@ -9,43 +9,38 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-background/90 backdrop-blur-md">
+      <div className="w-[90%] lg:w-[80%] mx-auto h-20 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {/* Logo Placeholder */}
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-            <svg
-              className="w-5 h-5 text-primary-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
+          {/* Lotus Logo Placeholder */}
+          <div className="relative w-8 h-8 flex items-center justify-center">
+            <div className="absolute w-3 h-5 bg-primary/60 rounded-full transform -rotate-45 -translate-x-1 translate-y-0.5"></div>
+            <div className="absolute w-3 h-5 bg-primary/80 rounded-full transform rotate-45 translate-x-1 translate-y-0.5"></div>
+            <div className="absolute w-3.5 h-6 bg-primary rounded-full z-10"></div>
           </div>
-          <span className="font-bold text-xl tracking-tight">SalonOS</span>
+          <span className="font-extrabold text-xl tracking-tight text-zinc-900 dark:text-white">SalonOS</span>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center space-x-8 text-sm font-medium">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <Link href="/features" className="hover:text-primary transition-colors">Features</Link>
-          <Link href="/pricing" className="hover:text-primary transition-colors">Pricing</Link>
-          <Link href="/solutions" className="hover:text-primary transition-colors">Solutions</Link>
-          <Link href="/resources" className="hover:text-primary transition-colors flex items-center gap-1">
+        <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+          <Link href="/" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</Link>
+          <Link href="/features" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Features</Link>
+          <Link href="/pricing" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Pricing</Link>
+          <Link href="/solutions" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Solutions</Link>
+          <Link href="/resources" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1 group">
             Resources
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </Link>
-          <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+          <Link href="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About</Link>
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-4">
-          <Link href="https://app.blogcube.site/login" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
+        <div className="hidden md:flex items-center gap-6">
+          <Link href="https://app.blogcube.site/login" className="text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
             Login
           </Link>
           <Link href="https://app.blogcube.site/register">
-            <Button className="rounded-full px-6 whitespace-nowrap">Start Free</Button>
+            <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white font-medium shadow-sm">Start Free</Button>
           </Link>
         </div>
 
