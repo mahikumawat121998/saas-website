@@ -21,8 +21,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${font.variable} h-full antialiased`}
+      className={`${font.variable} h-full antialiased dark`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+              } catch (_) {}
+            `,
+          }}
+        />
+      </head>
       <body suppressHydrationWarning className="min-h-full flex flex-col font-sans">
         <Navbar />
         <main className="flex-1 pt-16">
