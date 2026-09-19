@@ -9,8 +9,8 @@ const font = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "SalonOS | Modern Salon Management Platform",
-  description: "SalonOS brings appointments, customers, staff, billing, payments and business insights into one simple platform.",
+  title: "SalonNO | Modern Salon Management Platform",
+  description: "SalonNO brings appointments, customers, staff, billing, payments and business insights into one simple platform.",
 };
 
 export default function RootLayout({
@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${font.variable} h-full antialiased dark`}
     >
       <head>

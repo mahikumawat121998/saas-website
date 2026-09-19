@@ -31,7 +31,7 @@ export default function Home() {
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5b3af7] to-[#3b82f6]">Grow your business.</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                SalonOS brings appointments, customers, staff, billing, payments and business insights into one simple platform.
+                SalonNO brings appointments, customers, staff, billing, payments and business insights into one simple platform.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
@@ -62,8 +62,10 @@ export default function Home() {
                   <div className="w-[100px] bg-white dark:bg-zinc-950 border-r flex flex-col pt-3 shrink-0">
                      {/* Logo */}
                      <div className="flex items-center gap-1.5 px-3 mb-4">
-                        <div className="w-5 h-5 bg-[#c8b2ff] text-[#5b3af7] rounded flex items-center justify-center font-bold text-[10px]">S</div>
-                        <div className="leading-none text-[7px] text-zinc-900 font-bold">SalonOS<br/><span className="text-[5px] text-zinc-500 font-normal">Management Suite</span></div>
+                        <div className="relative flex items-center justify-center">
+                           <Scissors className="w-4 h-4 text-primary" strokeWidth={2.5} />
+                        </div>
+                        <div className="leading-none text-[7px] text-zinc-900 font-bold">SalonNO<br/><span className="text-[5px] text-zinc-500 font-normal">Management Suite</span></div>
                      </div>
                      {/* Menu */}
                      <div className="flex-1 overflow-hidden px-2 space-y-0.5 font-medium text-zinc-600">
@@ -268,7 +270,7 @@ export default function Home() {
                 Your software shouldn&apos;t be.
               </h2>
               <p className="text-[#71717a] text-[15px] leading-[1.7]">
-                Stop juggling WhatsApp messages, manual billing and spreadsheets. SalonOS helps you stay organized, save time and focus on what matters — your customers.
+                Stop juggling WhatsApp messages, manual billing and spreadsheets. SalonNO helps you stay organized, save time and focus on what matters — your customers.
               </p>
             </div>
             
@@ -319,7 +321,7 @@ export default function Home() {
                 Everything your salon needs. <span className="text-[#5b3af7]">One place.</span>
               </h2>
               <p className="text-[#71717a] text-[15px] mb-12 leading-[1.7]">
-                From booking to billing, SalonOS helps you run your salon smoothly and efficiently.
+                From booking to billing, SalonNO helps you run your salon smoothly and efficiently.
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
@@ -415,8 +417,10 @@ export default function Home() {
                   {/* Sidebar */}
                   <div className="w-32 bg-[#fafafa] border-r flex flex-col py-4 gap-1 px-2 shrink-0">
                      <div className="flex items-center gap-1.5 px-2 mb-6">
-                        <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center text-primary text-[8px] font-bold">S</div>
-                        <span className="font-extrabold text-[11px] text-zinc-900 tracking-tight">SalonOS</span>
+                        <div className="relative flex items-center justify-center">
+                           <Scissors className="w-4 h-4 text-primary" strokeWidth={2.5} />
+                        </div>
+                        <span className="font-extrabold text-[11px] text-zinc-900 tracking-tight">SalonNO</span>
                      </div>
                      <div className="flex items-center gap-2 px-2 py-1.5 bg-[#f0ecfc] text-[#5b3af7] rounded-md font-bold"><LayoutDashboard className="w-3 h-3"/> Dashboard</div>
                      <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><Calendar className="w-3 h-3"/> Appointments</div>
@@ -476,8 +480,10 @@ export default function Home() {
                   
                   <div className="flex justify-between items-center mt-5 mb-6">
                      <div className="flex items-center gap-1.5">
-                        <div className="w-5 h-5 rounded bg-primary/20 flex items-center justify-center text-[#5b3af7] text-[10px] font-bold">S</div>
-                        <span className="font-extrabold text-[12px] text-zinc-900 tracking-tight">SalonOS</span>
+                        <div className="relative flex items-center justify-center">
+                           <Scissors className="w-4 h-4 text-primary" strokeWidth={2.5} />
+                        </div>
+                        <span className="font-extrabold text-[12px] text-zinc-900 tracking-tight">SalonNO</span>
                      </div>
                      <Menu className="w-4 h-4 text-zinc-800" />
                   </div>
@@ -673,7 +679,7 @@ export default function Home() {
                 Indian salons work.
               </h2>
               <p className="text-zinc-500 text-lg mb-8 leading-relaxed">
-                From UPI payments to GST billing, SalonOS is designed for Indian salon owners and their unique needs.
+                From UPI payments to GST billing, SalonNO is designed for Indian salon owners and their unique needs.
               </p>
             </div>
             <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8">
@@ -768,7 +774,7 @@ export default function Home() {
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Billing & Payments</li>
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> 3 Staff Members</li>
                </ul>
-               <Link href="https://app.blogcube.site/register" className="w-full">
+               <Link href="https://app.salonno.com/register" className="w-full">
                  <Button variant="outline" className="w-full h-12 rounded-full font-bold border-zinc-200 text-zinc-900 hover:bg-zinc-50">Get Started</Button>
                </Link>
              </div>
@@ -791,7 +797,7 @@ export default function Home() {
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> 10 Staff Members</li>
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> Inventory Management</li>
                </ul>
-               <Link href="https://app.blogcube.site/register" className="w-full mt-auto">
+               <Link href="https://app.salonno.com/register" className="w-full mt-auto">
                  <Button className="w-full h-12 rounded-full font-bold bg-[#5b3af7] hover:bg-[#4b2ce0] text-white shadow-md">Get Started</Button>
                </Link>
              </div>
@@ -810,7 +816,7 @@ export default function Home() {
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Dedicated Support</li>
                  <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Unlimited Staff Members</li>
                </ul>
-               <Link href="https://app.blogcube.site/register" className="w-full">
+               <Link href="https://app.salonno.com/register" className="w-full">
                  <Button variant="outline" className="w-full h-12 rounded-full font-bold border-zinc-200 text-zinc-900 hover:bg-zinc-50">Get Started</Button>
                </Link>
              </div>
@@ -824,14 +830,14 @@ export default function Home() {
            <div className="flex flex-col lg:flex-row gap-16">
              <div className="lg:w-1/3">
                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight text-zinc-900 dark:text-white">Built for ambitious<br />salon owners.</h2>
-               <p className="text-zinc-500 text-lg leading-relaxed">Join a growing community of salon owners who are growing their business with SalonOS.</p>
+               <p className="text-zinc-500 text-lg leading-relaxed">Join a growing community of salon owners who are growing their business with SalonNO.</p>
              </div>
              <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-zinc-50 dark:bg-zinc-900/50 p-8 rounded-3xl border border-zinc-100 dark:border-zinc-800">
                   <div className="flex text-[#5b3af7] mb-6 gap-1">
                     {'★★★★★'.split('').map((star, i) => <span key={i}>{star}</span>)}
                   </div>
-                  <p className="text-lg mb-8 text-zinc-900 dark:text-white font-medium leading-relaxed">&quot;SalonOS saved us hours every week managing appointments and payments. The dashboard is super easy to use!&quot;</p>
+                  <p className="text-lg mb-8 text-zinc-900 dark:text-white font-medium leading-relaxed">&quot;SalonNO saved us hours every week managing appointments and payments. The dashboard is super easy to use!&quot;</p>
                   <div className="flex items-center gap-4 mt-auto">
                     <div className="w-12 h-12 rounded-full bg-zinc-200 overflow-hidden shrink-0"><Image src="https://ui-avatars.com/api/?name=Priya+Sharma&background=random" width={48} height={48} alt="Avatar" unoptimized={true} /></div>
                     <div>
@@ -879,12 +885,10 @@ export default function Home() {
       <footer className="border-t border-zinc-100 dark:border-zinc-800 py-12 bg-white dark:bg-black">
         <div className="w-[90%] lg:w-[80%] mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="relative w-6 h-6 flex items-center justify-center">
-              <div className="absolute w-2 h-4 bg-primary/60 rounded-full transform -rotate-45 -translate-x-1 translate-y-0.5"></div>
-              <div className="absolute w-2 h-4 bg-primary/80 rounded-full transform rotate-45 translate-x-1 translate-y-0.5"></div>
-              <div className="absolute w-2.5 h-4.5 bg-primary rounded-full z-10"></div>
+            <div className="relative flex items-center justify-center">
+              <Scissors className="w-6 h-6 text-primary" strokeWidth={2.5} />
             </div>
-            <span className="font-extrabold text-lg tracking-tight text-zinc-900 dark:text-white">SalonOS</span>
+            <span className="font-extrabold text-lg tracking-tight text-zinc-900 dark:text-white">SalonNO</span>
           </div>
           <div className="flex items-center gap-8 text-sm font-medium text-zinc-500">
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
@@ -895,7 +899,7 @@ export default function Home() {
             <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
           </div>
           <div className="text-xs text-muted-foreground">
-            © 2026 SalonOS. All rights reserved.
+            © 2026 SalonNO. All rights reserved.
           </div>
         </div>
       </footer>
