@@ -11,8 +11,10 @@ import {
 } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isYearly, setIsYearly] = useState(false);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -21,37 +23,41 @@ export default function Home() {
         <div className="w-[90%] lg:w-[80%] mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
             {/* Left Content */}
-            <div className="flex-1 text-center lg:text-left z-10 max-w-3xl lg:max-w-xl mx-auto">
-              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm text-primary mb-6">
+            <StaggerContainer className="flex-1 text-center lg:text-left z-10 max-w-3xl lg:max-w-xl mx-auto">
+              <StaggerItem className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-sm text-primary mb-6">
                 <span className="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
                 Modern Salon Management Platform
-              </div>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]">
-                Run your salon. <br className="hidden md:block" />
+              </StaggerItem>
+              <StaggerItem>
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]">
+                  Run your salon. <br className="hidden md:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5b3af7] to-[#3b82f6]">Grow your business.</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
-                SalonNO brings appointments, customers, staff, billing, payments and business insights into one simple platform.
-              </p>
+                </h1>
+              </StaggerItem>
+              <StaggerItem>
+                <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                  SalonNO brings appointments, customers, staff, billing, payments and business insights into one simple platform.
+                </p>
+              </StaggerItem>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+              <StaggerItem className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
                 <Button onClick={() => setIsModalOpen(true)} size="lg" className="w-full sm:w-auto rounded-full text-base font-semibold h-12 px-8 bg-[#5b3af7] hover:bg-[#4b2ce0] text-white shadow-md">
                   Start Free <span className="ml-2">→</span>
                 </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full text-base font-semibold h-12 px-8 border-zinc-200 hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900 text-zinc-900 dark:text-white">
                   Book a Demo
                 </Button>
-              </div>
+              </StaggerItem>
 
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-sm text-muted-foreground font-medium">
+              <StaggerItem className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-sm text-muted-foreground font-medium">
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-primary" /> No Setup Fee</span>
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-primary" /> Cancel Anytime</span>
                 <span className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-primary" /> 24/7 Support</span>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerContainer>
 
             {/* Right Dashboard Mockup */}
-            <div className="flex-1 w-full lg:w-auto relative z-10">
+            <FadeIn delay={0.2} direction="up" className="flex-1 w-full lg:w-auto relative z-10">
               <div className="relative w-full aspect-[4/3] md:aspect-[16/10] lg:aspect-[16/9] max-w-4xl mx-auto lg:ml-auto">
                 {/* Decorative background glow */}
                 <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full mix-blend-multiply dark:mix-blend-screen" />
@@ -248,7 +254,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           </div>
         </div>
         
@@ -261,7 +267,7 @@ export default function Home() {
         <div className="w-[90%] lg:w-[80%] mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Left Header */}
-            <div className="lg:w-[40%] flex flex-col items-start text-left shrink-0">
+            <FadeIn className="lg:w-[40%] flex flex-col items-start text-left shrink-0">
               <div className="inline-flex items-center rounded-full bg-[#f0ecfc] px-3 py-1 text-sm text-[#5b3af7] mb-4 font-bold">
                 The Problem
               </div>
@@ -272,11 +278,11 @@ export default function Home() {
               <p className="text-[#71717a] text-[15px] leading-[1.7]">
                 Stop juggling WhatsApp messages, manual billing and spreadsheets. SalonNO helps you stay organized, save time and focus on what matters — your customers.
               </p>
-            </div>
+            </FadeIn>
             
             {/* Right Cards */}
-            <div className="lg:w-[60%] grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
+            <StaggerContainer className="lg:w-[60%] grid grid-cols-1 md:grid-cols-3 gap-5">
+              <StaggerItem className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
                 <div className="w-10 h-10 rounded-[10px] bg-[#e6fcf1] dark:bg-[#e6fcf1]/10 flex items-center justify-center mb-5">
                   {/* Fake WhatsApp Icon */}
                   <svg className="w-5 h-5 text-[#00d26a]" viewBox="0 0 24 24" fill="currentColor">
@@ -285,24 +291,24 @@ export default function Home() {
                 </div>
                 <h3 className="font-extrabold text-[15px] mb-2 text-[#0f0f11] dark:text-white leading-[1.3]">Too many<br />WhatsApp messages</h3>
                 <p className="text-[#71717a] text-[13px] leading-[1.6]">Manage appointments and customer communication in one place.</p>
-              </div>
+              </StaggerItem>
               
-              <div className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
+              <StaggerItem className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
                 <div className="w-10 h-10 rounded-[10px] bg-[#f0ecfc] dark:bg-[#f0ecfc]/10 flex items-center justify-center mb-5">
                   <Receipt className="w-5 h-5 text-[#5b3af7]" strokeWidth={2.5} />
                 </div>
                 <h3 className="font-extrabold text-[15px] mb-2 text-[#0f0f11] dark:text-white leading-[1.3]">Manual billing</h3>
                 <p className="text-[#71717a] text-[13px] leading-[1.6]">Create professional invoices, accept payments instantly, and track outstanding balances.</p>
-              </div>
+              </StaggerItem>
               
-              <div className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
+              <StaggerItem className="bg-white dark:bg-zinc-950 rounded-[20px] p-6 border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col items-start transition-shadow hover:shadow-md">
                 <div className="w-10 h-10 rounded-[10px] bg-[#f0ecfc] dark:bg-[#f0ecfc]/10 flex items-center justify-center mb-5">
                   <BarChart className="w-5 h-5 text-[#5b3af7]" strokeWidth={2.5} />
                 </div>
                 <h3 className="font-extrabold text-[15px] mb-2 text-[#0f0f11] dark:text-white leading-[1.3]">No idea how your<br />salon is performing</h3>
                 <p className="text-[#71717a] text-[13px] leading-[1.6]">See revenue, staff performance and customer trends from one dashboard.</p>
-              </div>
-            </div>
+              </StaggerItem>
+            </StaggerContainer>
           </div>
         </div>
       </section>
@@ -313,7 +319,7 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center">
             
             {/* Left Features */}
-            <div className="lg:w-[45%] shrink-0">
+            <FadeIn className="w-full lg:w-[45%] shrink-0">
               <div className="inline-flex items-center rounded-full bg-[#f0ecfc] px-3 py-1 text-sm text-[#5b3af7] mb-6 font-bold">
                 Everything in One Place
               </div>
@@ -398,10 +404,10 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
             
             {/* Right Graphic Mockups */}
-            <div className="lg:w-[55%] relative mt-12 lg:mt-0 min-h-[500px]">
+            <FadeIn className="w-full lg:w-[55%] shrink-0 relative mt-12 lg:mt-0 min-h-[500px]">
                {/* Background Blobs */}
                <div className="absolute top-10 right-0 w-48 h-48 bg-[#f0ecfc] rounded-full blur-[40px] -z-10 mix-blend-multiply"></div>
                <div className="absolute bottom-10 left-10 w-64 h-64 bg-[#f0ecfc] rounded-full blur-[40px] -z-10 mix-blend-multiply"></div>
@@ -531,7 +537,7 @@ export default function Home() {
                     </div>
                   </div>
                </div>
-            </div>
+            </FadeIn>
             
           </div>
         </div>
@@ -667,77 +673,107 @@ export default function Home() {
       </section>
 
       {/* Localization Section */}
-      <section className="py-24 bg-white dark:bg-black">
-        <div className="w-[90%] lg:w-[80%] mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-1/3">
-              <div className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-sm text-indigo-600 mb-6 font-bold">
+      <section className="py-24 bg-[#f8f9fc] dark:bg-black relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(91,58,247,0.05)_0%,rgba(0,0,0,0)_70%)]"></div>
+        <div className="w-[90%] lg:w-[80%] mx-auto px-4 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-center">
+            
+            {/* Left Column */}
+            <FadeIn className="w-full lg:w-[30%] shrink-0 text-center lg:text-left">
+              <div className="inline-flex items-center justify-center rounded-full bg-indigo-50 px-3 py-1 text-[11px] text-indigo-600 mb-6 font-bold">
                 Built for Indian Salons
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight text-zinc-900 dark:text-white">
-                Made for the way <br />
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 leading-tight text-zinc-900 dark:text-white">
+                Made for the way <br className="hidden lg:block" />
                 Indian salons work.
               </h2>
-              <p className="text-zinc-500 text-lg mb-8 leading-relaxed">
-                From UPI payments to GST billing, SalonNO is designed for Indian salon owners and their unique needs.
+              <p className="text-zinc-500 text-[13px] mb-8 leading-relaxed max-w-sm mx-auto lg:mx-0">
+                From UPI payments to GST billing, SalonOS is designed for Indian salon owners and their unique needs.
               </p>
-            </div>
-            <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8">
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                   <Smartphone className="w-6 h-6" strokeWidth={1.5} />
+            </FadeIn>
+            
+            {/* Right Column Grid */}
+            <StaggerContainer className="w-full lg:w-[70%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-10 gap-x-6">
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                   <Smartphone className="w-5 h-5" strokeWidth={2} />
                  </div>
                  <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">UPI Payments</h4>
-                   <p className="text-sm text-zinc-500 mt-1">Quick and secure</p>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">UPI Payments</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Quick and secure</p>
                  </div>
-               </div>
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center shrink-0">
-                   <Receipt className="w-6 h-6" strokeWidth={1.5} />
-                 </div>
-                 <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">GST-ready Billing</h4>
-                   <p className="text-sm text-zinc-500 mt-1">Compliant and easy</p>
-                 </div>
-               </div>
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center shrink-0">
-                   <MessageCircle className="w-6 h-6" strokeWidth={1.5} />
+               </StaggerItem>
+               
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center shrink-0">
+                   <Receipt className="w-5 h-5" strokeWidth={2} />
                  </div>
                  <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">WhatsApp Updates</h4>
-                   <p className="text-sm text-zinc-500 mt-1">Keep customers informed</p>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">GST-ready Billing</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Compliant and easy</p>
                  </div>
-               </div>
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center shrink-0">
-                   <IndianRupee className="w-6 h-6" strokeWidth={1.5} />
-                 </div>
-                 <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">Indian ₹ Pricing</h4>
-                   <p className="text-sm text-zinc-500 mt-1">Simple and transparent</p>
-                 </div>
-               </div>
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                   <Users className="w-6 h-6" strokeWidth={1.5} />
+               </StaggerItem>
+               
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-[#e6fcf1] text-[#00d26a] flex items-center justify-center shrink-0">
+                   <MessageCircle className="w-5 h-5" strokeWidth={2} />
                  </div>
                  <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">Staff Commissions</h4>
-                   <p className="text-sm text-zinc-500 mt-1">Motivate your team</p>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">WhatsApp Notifications</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Keep customers informed</p>
                  </div>
-               </div>
-               <div className="flex flex-col gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
-                   <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
+               </StaggerItem>
+               
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-500 flex items-center justify-center shrink-0">
+                   <IndianRupee className="w-5 h-5" strokeWidth={2} />
                  </div>
                  <div>
-                   <h4 className="font-bold text-base text-zinc-900 dark:text-white">Multi-tenant</h4>
-                   <p className="text-sm text-zinc-500 mt-1">For growing salon chains</p>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">Indian ₹ Pricing</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Simple and transparent</p>
                  </div>
-               </div>
-            </div>
+               </StaggerItem>
+               
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                   <Users className="w-5 h-5" strokeWidth={2} />
+                 </div>
+                 <div>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">Staff Commissions</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Motivate your team</p>
+                 </div>
+               </StaggerItem>
+
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-red-50 text-red-500 flex items-center justify-center shrink-0">
+                   <Bell className="w-5 h-5" strokeWidth={2} />
+                 </div>
+                 <div>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">Customer Reminders</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Bring them back</p>
+                 </div>
+               </StaggerItem>
+               
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
+                   <ShieldCheck className="w-5 h-5" strokeWidth={2} />
+                 </div>
+                 <div>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">Multi-tenant Management</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">For growing salon chains</p>
+                 </div>
+               </StaggerItem>
+
+               <StaggerItem className="flex items-start gap-3">
+                 <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                   <CreditCard className="w-5 h-5" strokeWidth={2} />
+                 </div>
+                 <div>
+                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-white leading-tight">Razorpay Integration</h4>
+                   <p className="text-[11px] text-zinc-500 mt-1">Cards, UPI and more</p>
+                 </div>
+               </StaggerItem>
+            </StaggerContainer>
           </div>
         </div>
       </section>
@@ -754,18 +790,31 @@ export default function Home() {
             </p>
             
             <div className="inline-flex items-center rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-1 mt-8 shadow-sm">
-              <button className="px-6 py-2.5 rounded-full bg-zinc-900 text-white text-sm font-bold shadow-sm">Monthly</button>
-              <button className="px-6 py-2.5 rounded-full text-zinc-500 hover:text-zinc-900 dark:hover:text-white text-sm font-bold">Yearly <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full ml-1 uppercase">Save 20%</span></button>
+              <button 
+                onClick={() => setIsYearly(false)}
+                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${!isYearly ? 'bg-zinc-900 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}
+              >
+                Monthly
+              </button>
+              <button 
+                onClick={() => setIsYearly(true)}
+                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center ${isYearly ? 'bg-zinc-900 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}
+              >
+                Yearly <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ml-1 uppercase ${isYearly ? 'bg-green-500/20 text-green-100' : 'bg-green-50 text-green-600'}`}>Save 20%</span>
+              </button>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
              {/* Starter */}
              <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm flex flex-col h-full hover:border-[#5b3af7]/30 transition-colors">
-               <h3 className="font-bold text-2xl mb-2 text-zinc-900 dark:text-white">Starter</h3>
+               <div className="flex items-center justify-between mb-2">
+                 <h3 className="font-bold text-2xl text-zinc-900 dark:text-white">Starter</h3>
+                 <span className="bg-green-50 text-green-600 border border-green-200 dark:border-green-800/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">1 Month Free</span>
+               </div>
                <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">₹999</span>
-                 <span className="text-zinc-500 mb-2 font-medium">/mo</span>
+                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹9,990' : '₹999'}</span>
+                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
                </div>
                <p className="text-sm text-zinc-500 mb-8 mt-2">For small salons with up to 3 staff</p>
                <ul className="space-y-4 mb-10 flex-1">
@@ -786,8 +835,8 @@ export default function Home() {
                </div>
                <h3 className="font-bold text-2xl mb-2 text-[#5b3af7]">Growth</h3>
                <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">₹1,999</span>
-                 <span className="text-zinc-500 mb-2 font-medium">/mo</span>
+                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹19,990' : '₹1,999'}</span>
+                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
                </div>
                <p className="text-sm text-zinc-500 mb-8 mt-2">For growing salons with up to 10 staff</p>
                <ul className="space-y-4 mb-10 flex-1">
@@ -806,8 +855,8 @@ export default function Home() {
              <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm flex flex-col h-full hover:border-[#5b3af7]/30 transition-colors">
                <h3 className="font-bold text-2xl mb-2 text-zinc-900 dark:text-white">Pro</h3>
                <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">₹3,999</span>
-                 <span className="text-zinc-500 mb-2 font-medium">/mo</span>
+                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹39,990' : '₹3,999'}</span>
+                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
                </div>
                <p className="text-sm text-zinc-500 mb-8 mt-2">For established salons & chains</p>
                <ul className="space-y-4 mb-10 flex-1">
@@ -859,9 +908,9 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-             </div>
-           </div>
-        </div>
+              </div>
+            </div>
+          </div>
       </section>
 
       {/* Footer CTA */}
