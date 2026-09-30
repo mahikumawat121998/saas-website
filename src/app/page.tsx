@@ -1,20 +1,62 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { 
   ArrowRight, CheckCircle2, LayoutDashboard, Calendar, Users, 
   Settings, MessageCircle, FileText, Receipt, BarChart, Bell, 
   Menu, X, Smartphone, IndianRupee, ShieldCheck, PlayCircle, Star,
   Grid, Clock, UserCircle, CalendarOff, Shield, Scissors, CreditCard,
-  Package, MapPin, Search, Moon, SlidersHorizontal, TrendingUp, Home as HomeIcon, MoreHorizontal
+  Package, MapPin, Search, Moon, SlidersHorizontal, TrendingUp, Home as HomeIcon, MoreHorizontal, ChevronDown
 } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/animations/FadeIn";
+import { PricingCards } from "@/components/PricingCards";
+const COUNTRIES = [
+  { code: "+91", flag: "🇮🇳" }, { code: "+1", flag: "🇺🇸" }, { code: "+44", flag: "🇬🇧" },
+  { code: "+61", flag: "🇦🇺" }, { code: "+971", flag: "🇦🇪" }, { code: "+65", flag: "🇸🇬" },
+  { code: "+60", flag: "🇲🇾" }, { code: "+62", flag: "🇮🇩" }, { code: "+66", flag: "🇹🇭" },
+  { code: "+63", flag: "🇵🇭" }, { code: "+84", flag: "🇻🇳" }, { code: "+81", flag: "🇯🇵" },
+  { code: "+82", flag: "🇰🇷" }, { code: "+86", flag: "🇨🇳" }, { code: "+92", flag: "🇵🇰" },
+  { code: "+880", flag: "🇧🇩" }, { code: "+966", flag: "🇸🇦" }, { code: "+27", flag: "🇿🇦" },
+  { code: "+234", flag: "🇳🇬" }, { code: "+49", flag: "🇩🇪" }, { code: "+33", flag: "🇫🇷" },
+  { code: "+39", flag: "🇮🇹" }, { code: "+34", flag: "🇪🇸" }, { code: "+31", flag: "🇳🇱" },
+  { code: "+55", flag: "🇧🇷" }, { code: "+52", flag: "🇲🇽" }, { code: "+64", flag: "🇳🇿" }
+];
+
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isYearly, setIsYearly] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    // Check hash on initial load
+    if (window.location.hash === '#get-started') {
+      setIsModalOpen(true);
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+
+    const handleOpen = () => setIsModalOpen(true);
+    window.addEventListener('open-get-started', handleOpen);
+    
+    // Check hash on hashchange (if navigating from another page)
+    const handleHashChange = () => {
+      if (window.location.hash === '#get-started') {
+        setIsModalOpen(true);
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('open-get-started', handleOpen);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -330,213 +372,94 @@ export default function Home() {
                 From booking to billing, SalonNO helps you run your salon smoothly and efficiently.
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+              <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <Calendar className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Appointments</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Online and staff-managed bookings.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Appointments</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Online and staff-managed bookings.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <Users className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Customers</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Customer profiles, history and preferences.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Customers</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Customer profiles, history and preferences.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <UserCircle className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Staff</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Schedules, attendance, performance & commissions.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Staff</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Schedules, attendance, performance & commissions.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <Scissors className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Services</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Manage your services, packages and pricing.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Services</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Manage your services, packages and pricing.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <FileText className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Invoices</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Create and track invoices in seconds.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Invoices</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Create and track invoices in seconds.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <CreditCard className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Payments</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">UPI, cards, and more. Get paid faster.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Payments</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">UPI, cards, and more. Get paid faster.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <BarChart className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Reports</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Understand your business with real-time insights.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Reports</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Understand your business with real-time insights.</p>
                   </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0">
+                </StaggerItem>
+                <StaggerItem className="flex gap-4 group cursor-pointer hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 -m-3 rounded-2xl transition-all duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-[#f0ecfc] text-[#5b3af7] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300 shadow-sm group-hover:shadow-[0_0_15px_rgba(91,58,247,0.4)]">
                     <Bell className="w-5 h-5" strokeWidth={2} />
                   </div>
                   <div>
-                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight">Reminders</h4>
-                    <p className="text-[12px] text-zinc-500 leading-relaxed">Bring customers back with automated messages.</p>
+                    <h4 className="font-extrabold mb-1.5 text-[14px] text-zinc-900 dark:text-white leading-tight group-hover:text-[#5b3af7] transition-colors duration-300">Reminders</h4>
+                    <p className="text-[12px] text-zinc-500 leading-relaxed group-hover:text-zinc-600 dark:group-hover:text-zinc-400 transition-colors duration-300">Bring customers back with automated messages.</p>
                   </div>
-                </div>
-              </div>
+                </StaggerItem>
+              </StaggerContainer>
             </FadeIn>
             
-            {/* Right Graphic Mockups */}
-            <FadeIn className="w-full lg:w-[55%] shrink-0 relative mt-12 lg:mt-0 min-h-[500px]">
-               {/* Background Blobs */}
-               <div className="absolute top-10 right-0 w-48 h-48 bg-[#f0ecfc] rounded-full blur-[40px] -z-10 mix-blend-multiply"></div>
-               <div className="absolute bottom-10 left-10 w-64 h-64 bg-[#f0ecfc] rounded-full blur-[40px] -z-10 mix-blend-multiply"></div>
-               <svg className="absolute -top-10 -right-20 w-48 h-48 text-[#f0ecfc] -z-10 rotate-45" viewBox="0 0 200 200" fill="currentColor">
-                 <path d="M45.7,-76.3C58.9,-69.3,69,-56.3,77.7,-42.6C86.4,-28.8,93.6,-14.4,92.5,-0.6C91.4,13.2,82,26.4,72.9,38.9C63.8,51.4,55,63.1,43.2,71C31.3,78.9,15.6,83,1,81.3C-13.6,79.7,-27.2,72.4,-38.7,63.7C-50.2,55.1,-59.6,45.2,-68.2,33.5C-76.7,21.8,-84.4,8.3,-84.8,-5.4C-85.1,-19.1,-78.2,-33.1,-68.5,-44.6C-58.8,-56.1,-46.3,-65.2,-33,-72.1C-19.6,-79,-6.2,-83.8,4.7,-81.4C15.6,-79.1,32.6,-83.3,45.7,-76.3Z" transform="translate(100 100)" />
-               </svg>
-               <svg className="absolute top-1/2 -left-16 w-40 h-40 text-[#f0ecfc] -z-10" viewBox="0 0 200 200" fill="currentColor">
-                 <path d="M45.7,-76.3C58.9,-69.3,69,-56.3,77.7,-42.6C86.4,-28.8,93.6,-14.4,92.5,-0.6C91.4,13.2,82,26.4,72.9,38.9C63.8,51.4,55,63.1,43.2,71C31.3,78.9,15.6,83,1,81.3C-13.6,79.7,-27.2,72.4,-38.7,63.7C-50.2,55.1,-59.6,45.2,-68.2,33.5C-76.7,21.8,-84.4,8.3,-84.8,-5.4C-85.1,-19.1,-78.2,-33.1,-68.5,-44.6C-58.8,-56.1,-46.3,-65.2,-33,-72.1C-19.6,-79,-6.2,-83.8,4.7,-81.4C15.6,-79.1,32.6,-83.3,45.7,-76.3Z" transform="translate(100 100)" />
-               </svg>
 
-               {/* Desktop Mockup */}
-               <div className="absolute top-0 right-16 bottom-16 left-0 bg-white dark:bg-zinc-950 rounded-xl border border-zinc-200 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] flex overflow-hidden text-[9px]">
-                  {/* Sidebar */}
-                  <div className="w-32 bg-[#fafafa] border-r flex flex-col py-4 gap-1 px-2 shrink-0">
-                     <div className="flex items-center gap-1.5 px-2 mb-6">
-                        <div className="relative flex items-center justify-center">
-                           <Scissors className="w-4 h-4 text-primary" strokeWidth={2.5} />
-                        </div>
-                        <span className="font-extrabold text-[11px] text-zinc-900 tracking-tight">SalonNO</span>
-                     </div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 bg-[#f0ecfc] text-[#5b3af7] rounded-md font-bold"><LayoutDashboard className="w-3 h-3"/> Dashboard</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><Calendar className="w-3 h-3"/> Appointments</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><Users className="w-3 h-3"/> Customers</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><UserCircle className="w-3 h-3"/> Staff</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><Scissors className="w-3 h-3"/> Services</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><FileText className="w-3 h-3"/> Invoices</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><CreditCard className="w-3 h-3"/> Payments</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium"><BarChart className="w-3 h-3"/> Reports</div>
-                     <div className="flex items-center gap-2 px-2 py-1.5 text-zinc-600 hover:bg-zinc-100 rounded-md font-medium mt-auto"><Settings className="w-3 h-3"/> Settings</div>
-                  </div>
-                  {/* Main Content */}
-                  <div className="flex-1 p-6 flex flex-col bg-white">
-                     <div className="flex justify-between items-center mb-6">
-                        <h3 className="font-extrabold text-[16px] text-zinc-900">Appointments</h3>
-                        <div className="bg-[#5b3af7] text-white px-3 py-1.5 rounded-md font-bold shadow-sm">+ New Appointment</div>
-                     </div>
-                     <div className="flex gap-6 border-b text-zinc-500 font-bold mb-4">
-                        <span className="text-[#5b3af7] border-b-2 border-[#5b3af7] pb-2">Upcoming</span>
-                        <span className="pb-2 cursor-pointer hover:text-zinc-800">Today</span>
-                        <span className="pb-2 cursor-pointer hover:text-zinc-800">Completed</span>
-                     </div>
-                     
-                     <div className="flex-1 flex flex-col">
-                        {[
-                          {time: '10:00', name: 'Rahul', service: 'Haircut', s1: 'Confirmed', s2: 'Confirmed', bg: 'bg-green-50 text-green-600', img: 'A'},
-                          {time: '11:30', name: 'Priya', service: 'Hair Color', s1: 'Confirmed', s2: 'Confirmed', bg: 'bg-green-50 text-green-600', img: 'P'},
-                          {time: '12:30', name: 'Neha', service: 'Facial', s1: 'Pending', s2: 'Pending', bg: 'bg-orange-50 text-orange-600', img: 'N'},
-                          {time: '02:00', name: 'Ankit', service: 'Beard Trim', s1: 'Confirmed', s2: 'Confirmed', bg: 'bg-green-50 text-green-600', img: 'A'},
-                          {time: '03:30', name: 'Simran', service: 'Manicure', s1: 'Confirmed', s2: 'Confirmed', bg: 'bg-green-50 text-green-600', img: 'S'},
-                        ].map((row, i) => (
-                           <div key={i} className="flex items-center justify-between py-3 border-b border-zinc-100 last:border-0 text-zinc-600">
-                              <span className="w-12 font-medium">{row.time}</span>
-                              <div className="flex items-center gap-2 w-32">
-                                <div className="w-5 h-5 rounded-full bg-zinc-200 overflow-hidden shrink-0">
-                                   <Image src={`https://ui-avatars.com/api/?name=${row.img}&background=random`} width={20} height={20} alt="" unoptimized />
-                                </div>
-                                <span className="font-extrabold text-zinc-900 text-[10px]">{row.name}</span>
-                              </div>
-                              <span className="flex-1">{row.service}</span>
-                              <div className="flex gap-4 w-32 justify-end">
-                                <span className={`px-2 py-0.5 rounded-full font-bold text-[7px] ${row.bg}`}>{row.s1}</span>
-                                <span className={`px-2 py-0.5 rounded-full font-bold text-[7px] ${row.bg}`}>{row.s2}</span>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
-                  </div>
-               </div>
-               
-               {/* Mobile Mockup */}
-               <div className="absolute -right-4 top-8 bottom-0 w-[45%] max-w-[280px] bg-white rounded-[32px] border-[6px] border-zinc-900 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] p-4 flex flex-col z-20">
-                  <div className="w-32 h-5 bg-zinc-900 rounded-b-2xl absolute top-0 left-1/2 -translate-x-1/2 z-10 flex justify-center items-center gap-1">
-                     <div className="w-1 h-1 bg-zinc-600 rounded-full"></div>
-                     <div className="w-8 h-1 bg-zinc-600 rounded-full"></div>
-                  </div>
-                  
-                  <div className="flex justify-between items-center mt-5 mb-6">
-                     <div className="flex items-center gap-1.5">
-                        <div className="relative flex items-center justify-center">
-                           <Scissors className="w-4 h-4 text-primary" strokeWidth={2.5} />
-                        </div>
-                        <span className="font-extrabold text-[12px] text-zinc-900 tracking-tight">SalonNO</span>
-                     </div>
-                     <Menu className="w-4 h-4 text-zinc-800" />
-                  </div>
-                  
-                  <div className="flex justify-between items-start mb-6">
-                     <div>
-                       <h2 className="text-[18px] font-extrabold leading-tight text-zinc-900">Good Morning,<br/>Priya 👋</h2>
-                     </div>
-                     <div className="w-8 h-8 rounded-full bg-zinc-200 overflow-hidden shrink-0 border border-zinc-200 shadow-sm">
-                        <Image src={`https://ui-avatars.com/api/?name=P&background=random`} width={32} height={32} alt="" unoptimized />
-                     </div>
-                  </div>
-                  
-                  <div className="bg-white rounded-xl shadow-sm border border-zinc-100 flex-1 flex flex-col overflow-hidden">
-                     <div className="px-3 py-2 border-b bg-zinc-50/50">
-                        <h4 className="font-extrabold text-[11px] text-zinc-900">Today&apos;s Appointments</h4>
-                     </div>
-                     <div className="flex-1 overflow-hidden flex flex-col p-2 gap-2">
-                        {[
-                          {time: '10:00', name: 'Rahul', service: 'Haircut'},
-                          {time: '11:30', name: 'Priya', service: 'Hair Color'},
-                          {time: '12:30', name: 'Neha', service: 'Facial'},
-                        ].map((item, i) => (
-                          <div key={i} className="flex justify-between items-center p-2.5 rounded-lg border border-zinc-100 bg-white shadow-sm text-[10px]">
-                            <span className="font-medium text-zinc-500 w-8">{item.time}</span>
-                            <span className="font-extrabold text-zinc-900 flex-1">{item.name}</span>
-                            <span className="text-zinc-500">{item.service}</span>
-                          </div>
-                        ))}
-                     </div>
-                  </div>
-                  
-                  <div className="h-14 mt-4 bg-white border-t -mx-4 -mb-4 rounded-b-[26px] flex justify-around items-center px-4 text-[9px] font-bold text-zinc-400">
-                    <div className="flex flex-col items-center gap-1 text-[#5b3af7]">
-                       <HomeIcon className="w-4 h-4" /> Home
-                    </div>
-                    <div className="flex flex-col items-center gap-1 hover:text-zinc-600 cursor-pointer">
-                       <Calendar className="w-4 h-4" /> Appointments
-                    </div>
-                    <div className="flex flex-col items-center gap-1 hover:text-zinc-600 cursor-pointer">
-                       <Users className="w-4 h-4" /> Customers
-                    </div>
-                    <div className="flex flex-col items-center gap-1 hover:text-zinc-600 cursor-pointer">
-                       <MoreHorizontal className="w-4 h-4" /> More
-                    </div>
-                  </div>
-               </div>
+            
+                   <FadeIn className="w-full lg:w-[55%] shrink-0 relative mt-12 lg:mt-0 flex justify-center items-center group">
+                 <div className="absolute inset-0 bg-[#5b3af7]/20 blur-[120px] rounded-full animate-pulse transition-opacity duration-700 opacity-60 group-hover:opacity-100 mix-blend-multiply dark:mix-blend-screen -z-10"></div>
+                 
+               <Image 
+                  src="/images/dashboard-mockup.jpg" 
+                  alt="Salon Management Dashboard" 
+                  width={800} 
+                  height={600} 
+                  className="rounded-2xl shadow-2xl border border-zinc-200 dark:border-zinc-800 w-full object-cover transform transition-all duration-700 group-hover:-translate-y-4 group-hover:shadow-[0_30px_60px_-15px_rgba(91,58,247,0.3)] group-hover:border-[#5b3af7]/40 relative z-10" 
+               />
             </FadeIn>
             
           </div>
@@ -781,95 +704,7 @@ export default function Home() {
       {/* Pricing Section */}
       <section className="py-24 bg-zinc-50 dark:bg-zinc-900/50">
         <div className="w-[90%] lg:w-[80%] mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-zinc-900 dark:text-white">
-              Simple pricing. No surprises.
-            </h2>
-            <p className="text-zinc-500 text-lg">
-              Choose a plan that fits your salon&apos;s size and goals.
-            </p>
-            
-            <div className="inline-flex items-center rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-1 mt-8 shadow-sm">
-              <button 
-                onClick={() => setIsYearly(false)}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${!isYearly ? 'bg-zinc-900 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}
-              >
-                Monthly
-              </button>
-              <button 
-                onClick={() => setIsYearly(true)}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center ${isYearly ? 'bg-zinc-900 text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'}`}
-              >
-                Yearly <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ml-1 uppercase ${isYearly ? 'bg-green-500/20 text-green-100' : 'bg-green-50 text-green-600'}`}>Save 20%</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-             {/* Starter */}
-             <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm flex flex-col h-full hover:border-[#5b3af7]/30 transition-colors">
-               <div className="flex items-center justify-between mb-2">
-                 <h3 className="font-bold text-2xl text-zinc-900 dark:text-white">Starter</h3>
-                 <span className="bg-green-50 text-green-600 border border-green-200 dark:border-green-800/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">1 Month Free</span>
-               </div>
-               <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹9,990' : '₹999'}</span>
-                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
-               </div>
-               <p className="text-sm text-zinc-500 mb-8 mt-2">For small salons with up to 3 staff</p>
-               <ul className="space-y-4 mb-10 flex-1">
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Appointments</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Customers</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Billing & Payments</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> 3 Staff Members</li>
-               </ul>
-               <Link href="https://app.salonno.com/register" className="w-full">
-                 <Button variant="outline" className="w-full h-12 rounded-full font-bold border-zinc-200 text-zinc-900 hover:bg-zinc-50">Get Started</Button>
-               </Link>
-             </div>
-
-             {/* Growth */}
-             <div className="bg-white dark:bg-zinc-950 rounded-3xl border-2 border-[#5b3af7] p-8 shadow-xl flex flex-col relative transform md:-translate-y-4 h-[calc(100%+2rem)]">
-               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#5b3af7] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-md">
-                 Most Popular
-               </div>
-               <h3 className="font-bold text-2xl mb-2 text-[#5b3af7]">Growth</h3>
-               <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹19,990' : '₹1,999'}</span>
-                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
-               </div>
-               <p className="text-sm text-zinc-500 mb-8 mt-2">For growing salons with up to 10 staff</p>
-               <ul className="space-y-4 mb-10 flex-1">
-                 <li className="flex items-start gap-3 text-sm font-bold"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> Everything in Starter</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> WhatsApp Notifications</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> Advanced Reports</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> 10 Staff Members</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-[#5b3af7] shrink-0" /> Inventory Management</li>
-               </ul>
-               <Link href="https://app.salonno.com/register" className="w-full mt-auto">
-                 <Button className="w-full h-12 rounded-full font-bold bg-[#5b3af7] hover:bg-[#4b2ce0] text-white shadow-md">Get Started</Button>
-               </Link>
-             </div>
-
-             {/* Pro */}
-             <div className="bg-white dark:bg-zinc-950 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm flex flex-col h-full hover:border-[#5b3af7]/30 transition-colors">
-               <h3 className="font-bold text-2xl mb-2 text-zinc-900 dark:text-white">Pro</h3>
-               <div className="flex items-end gap-1 mb-2 mt-4">
-                 <span className="text-5xl font-bold text-zinc-900 dark:text-white">{isYearly ? '₹39,990' : '₹3,999'}</span>
-                 <span className="text-zinc-500 mb-2 font-medium">{isYearly ? '/yr' : '/mo'}</span>
-               </div>
-               <p className="text-sm text-zinc-500 mb-8 mt-2">For established salons & chains</p>
-               <ul className="space-y-4 mb-10 flex-1">
-                 <li className="flex items-start gap-3 text-sm font-bold"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Everything in Growth</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Multi-location Support</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Dedicated Support</li>
-                 <li className="flex items-start gap-3 text-sm font-medium"><CheckCircle2 className="w-5 h-5 text-zinc-900 dark:text-white shrink-0" /> Unlimited Staff Members</li>
-               </ul>
-               <Link href="https://app.salonno.com/register" className="w-full">
-                 <Button variant="outline" className="w-full h-12 rounded-full font-bold border-zinc-200 text-zinc-900 hover:bg-zinc-50">Get Started</Button>
-               </Link>
-             </div>
-          </div>
+          <PricingCards />
         </div>
       </section>
 
@@ -930,67 +765,148 @@ export default function Home() {
          </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-100 dark:border-zinc-800 py-12 bg-white dark:bg-black">
-        <div className="w-[90%] lg:w-[80%] mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <div className="relative flex items-center justify-center">
-              <Scissors className="w-6 h-6 text-primary" strokeWidth={2.5} />
-            </div>
-            <span className="font-extrabold text-lg tracking-tight text-zinc-900 dark:text-white">SalonNO</span>
-          </div>
-          <div className="flex items-center gap-8 text-sm font-medium text-zinc-500">
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Features</a>
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Pricing</a>
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Solutions</a>
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About</a>
-            <a href="#" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
-          </div>
-          <div className="text-xs text-muted-foreground">
-            © 2026 SalonNO. All rights reserved.
-          </div>
-        </div>
-      </footer>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white dark:bg-zinc-950 rounded-2xl p-6 md:p-8 w-full max-w-md shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-[24px] p-6 sm:p-8 md:p-10 w-full max-w-lg shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-white/20 dark:border-white/10 relative transform animate-in zoom-in-95 duration-300">
             <button 
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">Get Started</h3>
-            <p className="text-sm text-zinc-500 mb-6">Fill out the form below and our team will get in touch with you shortly.</p>
-            
-            <form className="flex flex-col gap-4">
-              <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-zinc-300 mb-1.5">Email Address</label>
-                <input 
-                  type="email" 
-                  placeholder="hello@yoursalon.com"
-                  className="w-full h-11 px-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5b3af7]/50"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-zinc-300 mb-1.5">Business Query</label>
-                <textarea 
-                  placeholder="Tell us about your salon and what you are looking for..."
-                  className="w-full min-h-[100px] p-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#5b3af7]/50 resize-none"
-                  required
-                ></textarea>
-              </div>
-              <Button type="button" onClick={() => {
-                alert("Thanks for your interest! We'll be in touch soon.");
+              onClick={() => {
                 setIsModalOpen(false);
-              }} className="w-full h-12 mt-2 rounded-xl bg-[#5b3af7] hover:bg-[#4b2ce0] text-white font-bold text-base shadow-md">
-                Submit Request
-              </Button>
-            </form>
+                setTimeout(() => setIsSubmitted(false), 300); // Reset state after animation
+              }}
+              className="absolute top-6 right-6 p-2 rounded-full bg-zinc-100 dark:bg-white/10 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-white/20 transition-all"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            
+            {isSubmitted ? (
+              <div className="flex flex-col items-center justify-center py-10 sm:py-16 min-h-[400px] text-center animate-in fade-in zoom-in-95 duration-500">
+                <div className="relative mb-8">
+                  <div className="absolute inset-0 bg-green-500/20 dark:bg-green-400/20 rounded-full animate-ping opacity-75"></div>
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center shadow-lg ring-8 ring-green-50 dark:ring-green-500/10">
+                    <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
+                  </div>
+                </div>
+                <h3 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white mb-4 tracking-tight">Request Sent!</h3>
+                <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-[320px] sm:max-w-md mb-10">
+                  Thanks for your interest in SalonNO. Our team will get in touch with you shortly to schedule your demo.
+                </p>
+                <Button onClick={() => {
+                  setIsModalOpen(false);
+                  setTimeout(() => setIsSubmitted(false), 300);
+                }} className="w-full sm:w-auto min-w-[200px] h-[52px] rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-white/5 dark:hover:bg-white/10 text-zinc-900 dark:text-white border border-zinc-200 dark:border-white/10 font-bold text-[15px] transition-all">
+                  Done
+                </Button>
+              </div>
+            ) : (
+              <div className="animate-in fade-in duration-500">
+                <div className="mb-8">
+                  <h3 className="text-[28px] font-extrabold text-zinc-900 dark:text-white mb-2 tracking-tight">Get Started</h3>
+                  <p className="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed">Fill out the form below and our team will get in touch with you shortly to schedule a demo.</p>
+                </div>
+                
+                <form className="flex flex-col gap-5" onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  const formData = new FormData(e.currentTarget);
+                  const email = formData.get("email");
+                  const countryCode = formData.get("countryCode");
+                  const mobileRaw = formData.get("mobile");
+                  const mobile = `${countryCode} ${mobileRaw}`;
+                  const query = formData.get("query");
+                  try {
+                    const res = await fetch("http://localhost:3000/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email, mobile, query })
+                    });
+                    if (res.ok) {
+                      setIsSubmitted(true);
+                    } else {
+                      alert("Oops, something went wrong submitting your request.");
+                    }
+                  } catch (err) {
+                    alert("Failed to submit request. Please ensure the backend is running.");
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}>
+                  <div className="space-y-1.5">
+                    <label className="block text-sm font-bold text-zinc-900 dark:text-zinc-200">Email Address <span className="text-[#5b3af7]">*</span></label>
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="hello@yoursalon.com"
+                      className="w-full h-[52px] px-4 rounded-xl border-2 border-zinc-200/80 dark:border-white/10 bg-zinc-50/50 dark:bg-white/5 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-[#5b3af7] focus:bg-white dark:focus:bg-white/10 transition-all"
+                      required
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="block text-sm font-bold text-zinc-900 dark:text-zinc-200">Mobile Number <span className="text-[#5b3af7]">*</span></label>
+                    <div className="flex border-2 border-zinc-200/80 dark:border-white/10 rounded-xl bg-zinc-50/50 dark:bg-white/5 focus-within:border-[#5b3af7] focus-within:bg-white dark:focus-within:bg-white/10 transition-all h-[52px] relative">
+                      <input type="hidden" name="countryCode" value={selectedCountry.code} />
+                      <button
+                        type="button"
+                        onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                        disabled={isSubmitting}
+                        className="flex items-center gap-1.5 pl-4 pr-3 h-full bg-transparent text-zinc-900 dark:text-white focus:outline-none cursor-pointer text-[15px] hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors rounded-l-xl whitespace-nowrap"
+                      >
+                        <span className="text-lg leading-none">{selectedCountry.flag}</span>
+                        <span>{selectedCountry.code}</span>
+                        <ChevronDown className={`w-4 h-4 opacity-50 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      
+                      {isCountryDropdownOpen && (
+                        <>
+                          <div className="fixed inset-0 z-40" onClick={() => setIsCountryDropdownOpen(false)}></div>
+                          <div className="absolute top-[100%] left-0 mt-2 w-[180px] max-h-[240px] overflow-y-auto bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/10 rounded-xl shadow-2xl z-50 py-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-zinc-300 dark:[&::-webkit-scrollbar-thumb]:bg-zinc-700 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full">
+                            {COUNTRIES.map((country, index) => (
+                              <button
+                                key={index}
+                                type="button"
+                                className={`w-full text-left px-4 py-2.5 text-[14px] flex items-center gap-3 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors ${selectedCountry.code === country.code ? 'bg-zinc-50 dark:bg-white/10 font-bold text-zinc-900 dark:text-white' : 'text-zinc-600 dark:text-zinc-300'}`}
+                                onClick={() => {
+                                  setSelectedCountry(country);
+                                  setIsCountryDropdownOpen(false);
+                                }}
+                              >
+                                <span className="text-lg leading-none">{country.flag}</span>
+                                <span>{country.code}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </>
+                      )}
+
+                      <div className="w-[1px] bg-zinc-200/80 dark:bg-white/10 my-2"></div>
+                      <input 
+                        type="tel" 
+                        name="mobile"
+                        placeholder="98765 43210"
+                        className="w-full px-3 bg-transparent text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none rounded-r-xl"
+                        required
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="block text-sm font-bold text-zinc-900 dark:text-zinc-200">Business Query <span className="text-[#5b3af7]">*</span></label>
+                    <textarea 
+                      name="query"
+                      placeholder="Tell us about your salon and what you are looking for..."
+                      className="w-full min-h-[120px] p-4 rounded-xl border-2 border-zinc-200/80 dark:border-white/10 bg-zinc-50/50 dark:bg-white/5 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-[#5b3af7] focus:bg-white dark:focus:bg-white/10 transition-all resize-none"
+                      required
+                      disabled={isSubmitting}
+                    ></textarea>
+                  </div>
+                  <Button type="submit" disabled={isSubmitting} className="w-full h-[52px] mt-4 rounded-xl bg-gradient-to-r from-[#5b3af7] to-[#7C3AED] hover:from-[#4b2ce0] hover:to-[#6b2ade] text-white font-bold text-[15px] shadow-[0_8px_20px_-6px_rgba(91,58,247,0.5)] hover:shadow-[0_12px_24px_-6px_rgba(91,58,247,0.6)] hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:hover:-translate-y-0 disabled:cursor-not-allowed">
+                    {isSubmitting ? "Submitting..." : "Submit Request"}
+                  </Button>
+                </form>
+              </div>
+            )}
           </div>
         </div>
       )}

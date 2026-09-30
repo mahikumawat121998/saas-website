@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, HelpCircle, Video, ArrowRight, Download } from "lucide-react";
+import { BookOpen, HelpCircle, Video, ArrowRight } from "lucide-react";
+import { PlaybookBanner } from "@/components/PlaybookBanner";
 
 export const metadata: Metadata = {
   title: "Resources & Guides | SalonNO",
@@ -33,16 +34,22 @@ const articles = [
     category: "Marketing",
     title: "How to increase your salon bookings by 30% using WhatsApp",
     readTime: "5 min read",
+    slug: "increase-salon-bookings-whatsapp",
+    image: "/images/blog_marketing.jpg"
   },
   {
     category: "Operations",
     title: "The ultimate guide to setting up salon commission structures",
     readTime: "8 min read",
+    slug: "salon-commission-structures",
+    image: "/images/blog_operations.jpg"
   },
   {
     category: "Growth",
     title: "Why retaining existing clients is cheaper than finding new ones",
     readTime: "4 min read",
+    slug: "client-retention-vs-acquisition",
+    image: "/images/blog_growth.jpg"
   }
 ];
 
@@ -80,40 +87,7 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* Featured Asset / Download */}
-      <section className="py-20 bg-zinc-100 dark:bg-zinc-900/50 border-y border-zinc-200 dark:border-zinc-900 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto bg-primary/5 border border-primary/20 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center gap-12">
-          <div className="flex-1">
-            <div className="inline-flex items-center text-primary font-bold text-sm uppercase tracking-widest mb-4">
-              <Download className="w-4 h-4 mr-2" /> Free Download
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">The 2026 Salon Growth Playbook</h2>
-            <p className="text-zinc-600 dark:text-zinc-400 text-lg mb-8">
-              A comprehensive 30-page PDF guide on optimizing your pricing, managing staff retention, and leveraging digital tools to double your revenue this year.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white rounded-full px-6 py-4 flex-1 focus:outline-none focus:border-primary"
-              />
-              <button className="bg-primary text-white font-semibold rounded-full px-8 py-4 hover:bg-primary/90 transition-colors shrink-0">
-                Get the Guide
-              </button>
-            </div>
-          </div>
-          <div className="w-full md:w-1/3 aspect-[3/4] bg-zinc-50 dark:bg-zinc-950 rounded-2xl border border-zinc-200 dark:border-zinc-800 flex flex-col items-center justify-center shadow-2xl relative overflow-hidden">
-             <div className="absolute top-0 left-0 w-full h-2 bg-primary"></div>
-             <div className="p-8 text-center">
-               <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">Salon Growth<br/>Playbook</h3>
-               <p className="text-zinc-500 dark:text-zinc-500 text-sm">2026 Edition</p>
-             </div>
-             <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full border-4 border-primary/20 flex items-center justify-center">
-               <div className="w-8 h-8 rounded-full bg-primary"></div>
-             </div>
-          </div>
-        </div>
-      </section>
+      <PlaybookBanner />
 
       {/* Latest Articles */}
       <section id="blog" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -125,10 +99,13 @@ export default function ResourcesPage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {articles.map((article, index) => (
-            <Link key={index} href="#blog" className="group flex flex-col bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-3xl overflow-hidden hover:border-zinc-700 transition-colors">
-              <div className="w-full h-48 bg-zinc-100 dark:bg-zinc-900 relative overflow-hidden flex items-center justify-center border-b border-zinc-200 dark:border-zinc-900">
-                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(91,58,247,0.5)_0%,rgba(0,0,0,0)_100%)]"></div>
-                 <BookOpen className="w-12 h-12 text-zinc-800" />
+            <Link key={index} href={`/resources/blog/${article.slug}`} className="group flex flex-col bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-900 rounded-3xl overflow-hidden hover:border-zinc-700 transition-colors">
+              <div className="w-full flex justify-center pt-6 px-4 sm:px-6">
+                <div className="w-[80%] h-48 sm:h-56 relative overflow-hidden flex items-center justify-center rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 group-hover:border-primary/50 group-hover:shadow-[0_8px_30px_rgba(91,58,247,0.15)] transition-all duration-500">
+                   <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500"></div>
+                   <div className="absolute inset-0 bg-[#5b3af7]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
+                </div>
               </div>
               <div className="p-8 flex flex-col flex-1">
                 <div className="flex items-center justify-between mb-4">

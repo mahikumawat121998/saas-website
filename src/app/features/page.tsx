@@ -61,7 +61,7 @@ export default function FeaturesPage() {
             SalonNO replaces your appointment book, billing software, and Excel sheets with one beautiful, easy-to-use platform designed specifically for Indian salons.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="https://app.salonno.com/register" className="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(91,58,247,0.5)]">
+            <Link href="/#get-started" className="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(91,58,247,0.5)]">
               Start Free Trial
             </Link>
             <Link href="/contact" className="px-8 py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white rounded-full font-semibold hover:bg-zinc-800 transition-colors border border-zinc-200 dark:border-zinc-800">

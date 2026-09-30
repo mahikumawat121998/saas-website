@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Scissors, Store, Building2, CheckCircle2, AlertTriangle, ArrowRight } from "lucide-react";
+import { AnimatedSolutions } from "@/components/AnimatedSolutions";
 
 export const metadata: Metadata = {
   title: "Solutions | SalonNO - Modern Salon Management",
@@ -18,7 +19,8 @@ const solutions = [
       "Automated appointment reminders",
       "Simple, fast checkout with UPI",
       "Client history at your fingertips"
-    ]
+    ],
+    image: "/images/stylist.jpg"
   },
   {
     icon: <Store className="w-10 h-10 text-primary" />,
@@ -30,7 +32,8 @@ const solutions = [
       "Automated commission calculations",
       "WhatsApp CRM for customer retention",
       "Inventory alerts so you never run out"
-    ]
+    ],
+    image: "/images/growing_salon.jpg"
   },
   {
     icon: <Building2 className="w-10 h-10 text-primary" />,
@@ -42,7 +45,8 @@ const solutions = [
       "Standardized service menus across branches",
       "Centralized customer database",
       "Granular role-based access control"
-    ]
+    ],
+    image: "/images/franchise.jpg"
   }
 ];
 
@@ -72,43 +76,7 @@ export default function SolutionsPage() {
 
       {/* Solutions by Business Type */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="space-y-32">
-          {solutions.map((solution, index) => (
-            <div key={index} className={`flex flex-col md:flex-row gap-12 items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-              <div className="flex-1 space-y-6">
-                <div className="w-20 h-20 bg-primary/10 rounded-3xl flex items-center justify-center mb-4">
-                  {solution.icon}
-                </div>
-                <div>
-                  <h3 className="text-primary font-semibold tracking-wide uppercase text-sm mb-2">{solution.subtitle}</h3>
-                  <h2 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4">{solution.title}</h2>
-                  <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
-                    {solution.description}
-                  </p>
-                </div>
-                <ul className="space-y-4">
-                  {solution.benefits.map((benefit, i) => (
-                    <li key={i} className="flex items-center text-zinc-700 dark:text-zinc-300">
-                      <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mr-4" />
-                      <span className="text-lg">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex-1 w-full">
-                <div className="aspect-square md:aspect-auto md:h-[500px] w-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl relative overflow-hidden flex items-center justify-center group hover:border-primary/30 transition-colors">
-                  {/* Abstract placeholder for UI representation */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,58,247,0.1)_0%,rgba(0,0,0,0)_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="text-zinc-700 font-mono text-sm relative z-10 flex flex-col items-center gap-4">
-                    {solution.icon}
-                    Dashboard UI Placeholder
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <AnimatedSolutions solutions={solutions} />
       </section>
 
       {/* Problems Solved */}
@@ -144,7 +112,7 @@ export default function SolutionsPage() {
             Join the modern salon owners who are streamlining their business with SalonNO.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="https://app.salonno.com/register" className="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(91,58,247,0.5)]">
+            <Link href="/#get-started" className="px-8 py-4 bg-primary text-white rounded-full font-semibold hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_-10px_rgba(91,58,247,0.5)]">
               Start Free Trial
             </Link>
             <Link href="/contact" className="px-8 py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white rounded-full font-semibold hover:bg-zinc-800 transition-colors border border-zinc-200 dark:border-zinc-800">

@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 import { Menu, X, Sun, Moon, Scissors } from "lucide-react";
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-background/90 backdrop-blur-md">
@@ -20,16 +22,33 @@ export function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
-          <Link href="/" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</Link>
-          <Link href="/features" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Features</Link>
-          <Link href="/pricing" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Pricing</Link>
-          <Link href="/solutions" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Solutions</Link>
-          <Link href="/resources" className="hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center gap-1 group">
+        <div className="hidden lg:flex items-center space-x-4 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+          {[
+            { name: "Home", href: "/" },
+            { name: "Features", href: "/features" },
+            { name: "Pricing", href: "/pricing" },
+            { name: "Solutions", href: "/solutions" },
+            { name: "About", href: "/about" }
+          ].map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                className={`transition-all px-3 py-1.5 rounded-md border ${
+                  isActive 
+                    ? 'border-zinc-900 dark:border-white text-zinc-900 dark:text-white' 
+                    : 'border-transparent hover:text-zinc-900 dark:hover:text-white'
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+          <Link href="/resources" className={`transition-all px-3 py-1.5 rounded-md border ${pathname?.startsWith('/resources') ? 'border-zinc-900 dark:border-white text-zinc-900 dark:text-white' : 'border-transparent hover:text-zinc-900 dark:hover:text-white'} flex items-center gap-1 group`}>
             Resources
             <svg className="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </Link>
-          <Link href="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About</Link>
         </div>
 
         {/* Desktop Actions */}
@@ -48,7 +67,15 @@ export function Navbar() {
           <Link href="https://app.salonno.com/login" className="text-sm font-semibold text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">
             Login
           </Link>
-          <Link href="https://app.salonno.com/register">
+          <Link 
+            href="/#get-started" 
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('open-get-started'));
+              }
+            }}
+          >
             <Button className="rounded-full px-6 bg-primary hover:bg-primary/90 text-white font-medium shadow-sm">Start Free</Button>
           </Link>
         </div>
@@ -90,7 +117,16 @@ export function Navbar() {
           <Link href="https://app.salonno.com/login" className="text-lg font-medium hover:text-primary" onClick={() => setIsMobileMenuOpen(false)}>
             Login
           </Link>
-          <Link href="https://app.salonno.com/register" onClick={() => setIsMobileMenuOpen(false)}>
+          <Link 
+            href="/#get-started" 
+            onClick={(e) => {
+              setIsMobileMenuOpen(false);
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('open-get-started'));
+              }
+            }}
+          >
             <Button className="rounded-full w-full mt-2" size="lg">Start Free</Button>
           </Link>
         </div>
